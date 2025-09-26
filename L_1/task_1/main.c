@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
                 printf("The factorial of negative numbers is not defined\n");
                 return 1;
             }
-            printf("%d! = %llu\n", x, factorial(x));
+            printf("%d! = %llu\n", x, factorialX(x));
             break;
         default:
             printf("Unknown flag: %s\n", flag);
