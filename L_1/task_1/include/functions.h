@@ -9,4 +9,4 @@ bool isXPrime(const int x);
 void splitHexDigits(const int x);
 void tableOfPowers(const int x);
 void sumFrom12X(const int x);
-int factorialX(const int x);
+unsigned long long factorialX(const int x);
