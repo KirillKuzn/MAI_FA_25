@@ -19,7 +19,7 @@ int main(){
     }
     printf("Results:\n");
     for (size_t i = 0; i < T; i++){
-        printf("%d\n", nthPrime(res[i]));
+        printf("%d\n", nth_prime(res[i]));
     }
     free(res);
     res = NULL;

@@ -19,25 +19,25 @@ int main(int argc, char *argv[]) {
 
     switch (flag[1]) {
         case 'h':
-            printMultiplesOfX(x);
+            print_multiples_of_x(x);
             break;
         case 'p':
             if (x < 2) {
                 printf("%d is neither prime nor composite\n", x);
-            } else if (isXPrime(x)) {
+            } else if (is_prime(x)) {
                 printf("%d is prime\n", x);
             } else {
                 printf("%d is composite\n", x);
             }
             break;
         case 's':
-            splitHexDigits(x);
+            split_hex_digits(x);
             break;
         case 'e':
-            tableOfPowers(x);
+            table_of_powers(x);
             break;
         case 'a':
-            sumFrom12X(x);
+            sum_from12x(x);
             break;
         case 'f':
             if (x < 0) {

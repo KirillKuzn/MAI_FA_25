@@ -3,5 +3,5 @@
 #include <stdbool.h>
 #include <math.h>
 
-bool isXPrime(const int x);
-int nthPrime(const int n);
+bool is_prime(const int x);
+int nth_prime(const int n);

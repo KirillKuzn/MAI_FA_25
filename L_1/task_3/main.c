@@ -60,7 +60,7 @@ int main(int argc, char* argv[]){
         double c = parse_double(argv[5], &ok);
         if (!ok) { printf("Error: c is not a number\n"); return 1; }
 
-        isRightTriangle(a, b, c, eps);
+        is_right_triangle(a, b, c, eps);
         break;
     case ('m'):
         if (argc != 4) {

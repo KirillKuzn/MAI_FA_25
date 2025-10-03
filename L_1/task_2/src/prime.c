@@ -1,6 +1,6 @@
 #include "../include/prime.h"
 
-bool isXPrime(const int x){
+bool is_prime(const int x){
     if (x < 2) return false;
     if (x == 2) return true;
     if (x % 2 == 0) return false;
@@ -10,7 +10,7 @@ bool isXPrime(const int x){
     return true;
 }
 
-int nthPrime(const int n){
+int nth_prime(const int n){
     int index = 0, res = 2;
     while (index != n){
         if (isXPrime(res)) index++;

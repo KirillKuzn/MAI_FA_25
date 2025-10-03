@@ -6,4 +6,4 @@
 
 
 void quadratics(double a, double b, double c, double eps);
-void isRightTriangle(double a, double b, double c, double eps);
+void is_right_triangle(double a, double b, double c, double eps);

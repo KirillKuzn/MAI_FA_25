@@ -1,6 +1,6 @@
 #include "../include/functions.h"
 
-void printMultiplesOfX(const int x){
+void print_multiples_of_x(const int x){
     if (x > 100 || x < 1){
         printf("There are no numbers within 100 that are multiples of x\n");
         return;
@@ -11,7 +11,7 @@ void printMultiplesOfX(const int x){
     }
 }
 
-bool isXPrime(const int x){
+bool is_prime(const int x){
     if (x == 2) return true;
     if (x % 2 == 0) return false;
     for (int i = 3; i <= sqrt(x); i += 2) {
@@ -20,7 +20,7 @@ bool isXPrime(const int x){
     return true;
 }
 
-void splitHexDigits(const int x){
+void split_hex_digits(const int x){
     char buf[128];
     sprintf(buf, "%X", x);
     for (int i = 0; buf[i]; i++) {
@@ -29,7 +29,7 @@ void splitHexDigits(const int x){
     printf("\n");
 }
 
-void tableOfPowers(const int x){
+void table_of_powers(const int x){
     if (x > 10) {
         printf("For -e flag x must be less or equal 10");
         return;
@@ -43,7 +43,7 @@ void tableOfPowers(const int x){
     }
 }
 
-void sumFrom12X(const int x){
+void sum_from12x(const int x){
     if (x < 1){
         printf("For -a flag x must be greater or equal than 1");
         return;
