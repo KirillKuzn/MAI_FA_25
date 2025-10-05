@@ -22,10 +22,21 @@ int main(int argc, char *argv[]) {
 
     char token[128];
     while (fscanf(fin, "%127s", token) == 1) {
-        char *num = remove_leading_zeros(token);
+        int neg = 0;
+        char *num = token;
+
+        if (*num == '-'){
+            neg = 1;
+            num++;
+        }
+
+        num = remove_leading_zeros(num);
         int base = find_min_base(num);
         long long decimal = to_decimal(num, base);
-        fprintf(fout, "%s %d %lld\n", num, base, decimal);
+        if (neg){
+            decimal = -decimal;
+        }
+        fprintf(fout, "%s%s %d %lld\n", neg ? "-" : "", num, base, decimal);
     }
 
     fclose(fin);
