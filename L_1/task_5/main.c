@@ -8,6 +8,10 @@ int main(int argc, char *argv[]) {
     }
 
     char *flag = argv[1];
+    if (flag[0] != '/' || flag[0] != '-'){
+        fprintf(stderr, "The flag must be started with / or -\n");
+        return 1;
+    }
     char *input_path = argv[2];
     char output_path[256];
 
@@ -19,13 +23,13 @@ int main(int argc, char *argv[]) {
 
     FILE *in = fopen(input_path, "r");
     if (!in) {
-        perror("Error opening input file");
+        perror("Error opening input file\n");
         return 1;
     }
 
     FILE *out = fopen(output_path, "w");
     if (!out) {
-        perror("Error opening output file");
+        perror("Error opening output file\n");
         fclose(in);
         return 1;
     }
@@ -38,7 +42,7 @@ int main(int argc, char *argv[]) {
         case 's': process_s(in, out); break;
         case 'a': process_a(in, out); break;
         default:
-            fprintf(stderr, "Неизвестный флаг: %s\n", flag);
+            fprintf(stderr, "Unknown flag: %s\n", flag);
             fclose(in);
             fclose(out);
             return 1;

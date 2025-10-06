@@ -3,19 +3,19 @@
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        fprintf(stderr, "Использование: %s <input.txt> <output.txt>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <input.txt> <output.txt>\n", argv[0]);
         return 1;
     }
 
     FILE *fin = fopen(argv[1], "r");
     if (!fin) {
-        perror("Ошибка открытия входного файла");
+        perror("Error opening input file\n");
         return 1;
     }
 
     FILE *fout = fopen(argv[2], "w");
     if (!fout) {
-        perror("Ошибка открытия выходного файла");
+        perror("Error opening output file\n");
         fclose(fin);
         return 1;
     }

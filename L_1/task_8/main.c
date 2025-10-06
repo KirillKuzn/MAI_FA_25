@@ -22,7 +22,7 @@ int main() {
         if (strcmp(input, "Stop") == 0)
             break;
 
-        long long num = toDecimal(input, base);
+        long long num = to_decimal(input, base);
         long long absVal = (num < 0) ? -num : num;
 
         if (absVal > maxAbs) {
@@ -32,12 +32,12 @@ int main() {
     }
 
     char result[100];
-    fromDecimal(maxNum, base, result);
+    from_decimal(maxNum, base, result);
     printf("\nThe largest number in the original system (%d) by absolute value: %s\n", base, result);
 
     int bases[] = {9, 18, 27, 36};
     for (int i = 0; i < 4; i++) {
-        fromDecimal(maxNum, bases[i], result);
+        from_decimal(maxNum, bases[i], result);
         printf("In the system with base %d: %s\n", bases[i], result);
     }
 

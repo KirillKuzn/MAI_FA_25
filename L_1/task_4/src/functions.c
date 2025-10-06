@@ -51,7 +51,7 @@ double pi_limit(){
 }
 
 double pi_equation() {
-    double x = 3.0; // начальное приближение
+    double x = 3.0; 
     while (fabs(cos(x) + 1.0) > EPS) {
         x = x - (cos(x) + 1.0)/(-sin(x));
     }
@@ -95,7 +95,8 @@ double sqrt2_series(){
 
 double sqrt2_limit(){
     double x = -0.5;
-    while (sqrt(2) - x > EPS){
+    double sqrt2 = sqrt2_series();
+    while (fabs(sqrt2 - x) > EPS){
         x = x - pow(x, 2)/2 + 1;
     }
     return x;
@@ -110,10 +111,12 @@ double sqrt2_equation() {
 }
 
 double gamma_series() {
-    double gamma = -pi_equation()/6, term;
+    double gamma = -pi_equation() / 6.0;
+    double term;
     int k = 2;
     do {
-        term = 1 / pow((int)sqrt(k), 2) - 1 / k;
+        int s = (int) floor(sqrt(k));
+        term = 1.0 / (double)(s * s) - 1.0 / (double)k;
         gamma += term;
         k++;
     } while (fabs(term) > EPS);
@@ -138,31 +141,22 @@ bool is_prime(int n){
     return true;
 }
 
-double gamma_equation(){
+double gamma_equation() {
     double product = 1.0;
-    double prev_limit = 0.0;
-    double cur_limit = 0.0;
-
+    double prev = 0.0, cur = 0.0;
     int t = 2;
-    int step = 1;
 
-    do {
+    while (t < 1000000) {
         if (is_prime(t)) {
             product *= (t - 1.0) / t;
         }
-        
-        prev_limit = cur_limit;
-        cur_limit = log(t) * product;
+        prev = cur;
+        cur = log((double)t) * product;
 
-        if (t < 1000) step = 1;
-        else if (t < 10000) step = 10;
-        else if (t < 100000) step = 100;
-        else step = 1000;
-        
-        t += step;
-
-    } while(fabs(cur_limit - prev_limit) > EPS && t < 10000000);
-
-    return -log(cur_limit);
+        if (fabs(cur - prev) < EPS && t > 1000) break;
+        t++;
+    }
+    return -log(cur);
 }
+
 

@@ -4,6 +4,13 @@ int eq(double a, double b, double eps) {
     return fabs(a - b) < eps;
 }
 
+int cmp_perms(const double* p1, const double* p2, double eps) {
+    for (int i = 0; i < 3; i++)
+        if (!eq(p1[i], p2[i], eps)) return 0;
+    return 1;
+}
+
+
 void solveQuadratic(double a, double b, double c, double eps){
     if (eq(a, 0.0, eps)) {
         if (eq(b, 0.0, eps)) {
@@ -14,6 +21,9 @@ void solveQuadratic(double a, double b, double c, double eps){
             }
         } else {
             double x = -c / b;
+            if (fabs(x) < eps){
+                x = 0.0;
+            }
             printf("Linear equation, x = %.6f\n", x);
         }
         return;
@@ -24,6 +34,9 @@ void solveQuadratic(double a, double b, double c, double eps){
         printf("No real solutions\n");
     } else if (eq(D, 0.0, eps)) {
         double x = -b / (2*a);
+        if (fabs(x) < eps){
+            x = 0.0;
+        }
         printf("One solution: x = %.6f\n", x);
     } else {
         double sqrtD = sqrt(D);
@@ -35,10 +48,13 @@ void solveQuadratic(double a, double b, double c, double eps){
 
 void quadratics(double a, double b, double c, double eps){
     double coeffs[3] = {a, b, c};
-    int used[3] = {0, 0, 0};
     double perms[6][3];
     int count = 0;
 
+    if (a == b && b == c) {
+        solveQuadratic(a, b, c, eps);
+        return;
+    } 
     for (int i=0;i<3;i++)
         for (int j=0;j<3;j++)
             for (int k=0;k<3;k++)
@@ -49,10 +65,28 @@ void quadratics(double a, double b, double c, double eps){
                     count++;
                 }
 
-    for (int i=0;i<6;i++) {
-        printf("\nPermutation %d: a=%.3f, b=%.3f, c=%.3f\n",
-               i+1, perms[i][0], perms[i][1], perms[i][2]);
-        solveQuadratic(perms[i][0], perms[i][1], perms[i][2], eps);
+    double unique[6][3];
+    int unique_count = 0;
+
+    for (int i=0;i<count;i++) {
+        int is_dup = 0;
+        for (int j = 0; j < unique_count; j++){
+            if(cmp_perms(perms[i], unique[j], eps)){
+                is_dup = 1;
+                break;
+            }
+        }
+
+        if (!is_dup) {
+            for (int k = 0; k < 3; k++)
+                unique[unique_count][k] = perms[i][k];
+            unique_count++;
+
+            printf("\nPermutation %d: a=%.3f, b=%.3f, c=%.3f\n",
+                count, perms[i][0], perms[i][1], perms[i][2]);
+            solveQuadratic(perms[i][0], perms[i][1], perms[i][2], eps);
+        }
+        
     }
 }
 

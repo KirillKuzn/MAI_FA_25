@@ -32,9 +32,9 @@ int main(int argc, char* argv[]) {
 
     printf("epsilon = %.12g\n", eps);
     printf("a) ∫_0^1 ln(1+x)/x dx      ≈ %.15f\n", Ia);
-    printf("b) ∫_0^1 e^(-x^2/2) dx      ≈ %.15f\n", Ib);
-    printf("c) ∫_0^1 ln(1/(1-x)) dx     ≈ %.15f (delta=%.3e, tail=%.3e)\n", Ic, delta, tail);
-    printf("d) ∫_0^1 x^x dx             ≈ %.15f\n", Id);
+    printf("b) ∫_0^1 e^(-x^2/2) dx     ≈ %.15f\n", Ib);
+    printf("c) ∫_0^1 ln(1/(1-x)) dx    ≈ %.15f (delta=%.3e, tail=%.3e)\n", Ic, delta, tail);
+    printf("d) ∫_0^1 x^x dx            ≈ %.15f\n", Id);
 
     return 0;
 }

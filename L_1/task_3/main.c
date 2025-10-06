@@ -1,4 +1,5 @@
 #include "include/for_floats.h"
+#include <string.h>
 
 double parse_double(const char *s, int *ok) {
     char *endptr;
@@ -18,36 +19,20 @@ int main(int argc, char* argv[]){
     }
 
     char* flag = argv[1];
+    if (strlen(flag) != 2 || flag[0] != '-'){
+        printf("Wrong flag format: it must contain 2 symbols and starts with -\n");
+        return 1;
+    }
 
+    int ok;
     switch (flag[1])
     {
     case ('q'):
-        if (argc != 6) {
-            printf("The -q flag requires 4 parameters: eps a b c\n");
-            return 1;
-        }
-        int ok;
-        double eps = parse_double(argv[2], &ok);
-        if (!ok) { printf("Error: eps is not a number\n"); return 1; }
-
-        double a = parse_double(argv[3], &ok);
-        if (!ok) { printf("Error: a is not a number\n"); return 1; }
-
-        double b = parse_double(argv[4], &ok);
-        if (!ok) { printf("Error: b is not a number\n"); return 1; }
-
-        double c = parse_double(argv[5], &ok);
-        if (!ok) { printf("Error: c is not a number\n"); return 1; }
-
-        quadratics(a, b, c, eps);
-        break;
-
     case ('t'):
         if (argc != 6) {
-            printf("The -t flag requires 4 parameters: eps a b c\n");
+            printf("The -q/-t flag requires 4 parameters: eps a b c\n");
             return 1;
         }
-        int ok;
         double eps = parse_double(argv[2], &ok);
         if (!ok) { printf("Error: eps is not a number\n"); return 1; }
 
@@ -60,8 +45,13 @@ int main(int argc, char* argv[]){
         double c = parse_double(argv[5], &ok);
         if (!ok) { printf("Error: c is not a number\n"); return 1; }
 
-        is_right_triangle(a, b, c, eps);
+        if (flag[1] == 'q'){
+            quadratics(a, b, c, eps);
+        } else {
+            is_right_triangle(a, b, c, eps);
+        }
         break;
+
     case ('m'):
         if (argc != 4) {
             printf("The -m flag requires 2 parameters: x y\n");
@@ -79,7 +69,9 @@ int main(int argc, char* argv[]){
             printf("%d is not a multiple of %d\n", x, y);
         break;
     default:
-        break;
+        printf("Error: unknown flag\n");
+        printf("Usage: prog -q eps a b c | -m x y | -t eps a b c\n");
+        return 1;
     }
 
     return 0;

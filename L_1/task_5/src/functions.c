@@ -24,7 +24,7 @@ void process_i(FILE *in, FILE *out){
     }
 
     if (count > 0){
-        fprintf(out, "%d/n", count);
+        fprintf(out, "%d\n", count);
     }
 }
 
@@ -42,16 +42,13 @@ void process_s(FILE *in, FILE *out){
             count = 0;
         }
     }
-    
-    if (count > 0){
-        fprintf(out, "%d/n", count);
-    }
+    fprintf(out, "%d/n", count);
 }
 
 void process_a(FILE *in, FILE *out){
     int c;
     while ((c = fgetc(in)) != EOF) {
-        if (isdigit(c)) {
+        if (isdigit(c) || (unsigned char)c == '\n') {
             fputc(c, out);
         } else {
             fprintf(out, "%X", c);
